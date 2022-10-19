@@ -269,15 +269,14 @@ static public class AssignmentPart2
     {
 
 
-        if (SaveFileName[0] != null)
-        { Debug.Log(SaveFileName[0]); }
-        return SaveFileName;
 
+        return SaveFileName;
     }
 
     static public void LoadPartyDropDownChanged(string selectedName)
     {
         GameContent.RefreshUI();
+        LoadPartyButtonPressed2(selectedName);
     }
 
     static public void SavePartyButtonPressed()
@@ -346,12 +345,11 @@ static public class AssignmentPart2
 
         GameContent.partyCharacters.Clear();
 
-
         try
         {
             // Create an instance of StreamReader to read from a file.
             // The using statement also closes the StreamReader.
-            using (StreamReader sr = new StreamReader("c:/Temp/SaveFolder/"+ LoadName +".txt"))
+            using (StreamReader sr = new StreamReader("c:/Temp/SaveFolder/" + LoadName + ".txt"))
             {
                 string line;
                 // Read and display lines from the file until the end of

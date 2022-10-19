@@ -197,6 +197,8 @@ public class SystemManager : MonoBehaviour
 
     public void LoadDropDownChanged()
     {
+
+        Debug.Log("asdasduiansdi");
         int menuIndex = loadPartyDropDown.GetComponent<Dropdown>().value;
         List<Dropdown.OptionData> menuOptions = loadPartyDropDown.GetComponent<Dropdown>().options;
         string value = menuOptions[menuIndex].text;
@@ -206,11 +208,20 @@ public class SystemManager : MonoBehaviour
 
     public void SaveButton2Pressed()
     {
-        SaveFileName.Add(partyNameInputField.GetComponentInChildren<Text>().text);
+
+        // things to do: make sure duplicate names dont get repeated, have save file names show up
+
+        if (!SaveFileName.Contains(partyNameInputField.GetComponentInChildren<Text>().text))
+        {
+            SaveFileName.Add(partyNameInputField.GetComponentInChildren<Text>().text);
+        }
+     
 
         AssignmentPart2.SavePartyButtonPressed2(partyNameInputField.GetComponentInChildren<Text>().text);
 
         AssignmentPart2.GetListOfPartyNames(SaveFileName);
+
+        RefreshUI();
     }
 
     public void NewButtonPressed()
