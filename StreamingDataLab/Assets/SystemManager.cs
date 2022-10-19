@@ -24,6 +24,8 @@ public class SystemManager : MonoBehaviour
     GameObject newButton;
     GameObject deleteButton;
 
+    public List<string> SaveFileName = new List<string>();
+
     void Start()
     {
         GameContent.CharacterClassID.Init();
@@ -121,7 +123,7 @@ public class SystemManager : MonoBehaviour
 
             Dropdown dropdown = loadPartyDropDown.GetComponent<Dropdown>();
             dropdown.options.Clear();
-            foreach (string option in AssignmentPart2.GetListOfPartyNames())
+            foreach (string option in AssignmentPart2.GetListOfPartyNames(SaveFileName))
             {
                 dropdown.options.Add(new Dropdown.OptionData(option));
             }
@@ -184,13 +186,13 @@ public class SystemManager : MonoBehaviour
 
     public void SaveButtonPressed()
     {
-        AssignmentPart1.SavePartyButtonPressed();
+        AssignmentPart1.SavePartyButtonPressed1();
 
     }
 
     public void LoadButtonPressed()
     {
-        AssignmentPart1.LoadPartyButtonPressed();
+        AssignmentPart1.LoadPartyButtonPressed1();
     }
 
     public void LoadDropDownChanged()
@@ -204,7 +206,11 @@ public class SystemManager : MonoBehaviour
 
     public void SaveButton2Pressed()
     {
-        AssignmentPart2.SavePartyButtonPressed();
+        SaveFileName.Add(partyNameInputField.GetComponentInChildren<Text>().text);
+
+        AssignmentPart2.SavePartyButtonPressed2(partyNameInputField.GetComponentInChildren<Text>().text);
+
+        AssignmentPart2.GetListOfPartyNames(SaveFileName);
     }
 
     public void NewButtonPressed()
@@ -222,6 +228,11 @@ public class SystemManager : MonoBehaviour
 
         return partyNameInputField.GetComponentsInChildren<Text>()[1].text;
 
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
 }
